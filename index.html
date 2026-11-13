@@ -1,585 +1,1040 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="pt-BR" class="dark scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>E.S Informática | Suporte Empresarial</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>E.S Informática | Hardware, Periféricos, Upgrades e PCs Sob Medida em Franca - SP</title>
 
-<meta name="description" content="Suporte técnico em TI. Manutenção de computadores e notebooks com atendimento rápido e profissional.">
-<meta name="keywords" content="suporte TI, manutenção computador, suporte informática.">
+  <!-- Google Fonts: Inter & Rajdhani para estética Tech/Hardware -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
 
-<style>
-html { scroll-behavior: smooth; }
-* { margin:0; padding:0; box-sizing:border-box; font-family:Segoe UI, Arial; }
-body { background:#f4f8fa; color:#333; }
+  <!-- Font Awesome para ícones de hardware e UI -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
-/* HEADER */
-header {
-  position: fixed;
-  top:0;
-  width:100%;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:15px 8%;
-  transition:0.4s;
-  z-index:1000;
-  background:white;
-}
-header.scrolled {
-  background:#2A8CA5;
-  box-shadow:0 5px 15px rgba(0,0,0,0.2);
-}
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Rajdhani', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              dark: '#090D16',
+              card: '#111827',
+              surface: '#1E293B',
+              cyan: '#06B6D4',
+              blue: '#2563EB',
+              whatsapp: '#25D366',
+              whatsappDark: '#1EBE5D',
+            }
+          }
+        }
+      }
+    };
+  </script>
 
-/* LOGO */
-.logo {
-  display:flex;
-  align-items:center;
-  gap:15px;
-  color:#2A8CA5;
-  font-weight:bold;
-  font-size:26px;
-}
-.logo img { height:80px; }
-
-/* MENU */
-nav {
-  display:flex;
-  align-items:center;
-  gap:20px;
-}
-nav a {
-  color:#333;
-  text-decoration:none;
-  font-weight:600;
-}
-header.scrolled nav a { color:white; }
-header.scrolled .logo { color:white; }
-
-/* HERO */
-.hero {
-  height:100vh;
-  background:linear-gradient(120deg,#2A8CA5,#3FA7C4);
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  color:white;
-  padding:20px;
-}
-.hero h1 { font-size:52px; margin-bottom:20px; }
-.hero p { font-size:20px; max-width:700px; margin-bottom:30px; }
-
-/* BOTÕES */
-.btn {
-  background:#25d366;
-  padding:15px 30px;
-  border-radius:30px;
-  color:#333;
-  text-decoration:none;
-  font-weight:bold;
-  transition:0.3s;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-}
-.btn:hover { transform:scale(1.08); }
-
-/* SEÇÕES PADRONIZADAS */
-.section {
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  padding:100px 10%;
-  opacity:0;
-  transform:translateY(40px);
-  transition:1s;
-}
-
-.section.show {
-  opacity:1;
-  transform:translateY(0);
-}
-.section h2 {
-  text-align:center;
-  font-size:36px;
-  margin-bottom:40px;
-  color:#2A8CA5;
-}
-
-/* SOBRE */
-.about {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  align-items:start;
-}
-.about video {
-  width:220px;
-  height:100%;
-  display:block;
-  overflow:hidden;
-  border-radius:15px;
-  margin-left:300px;
-}
-.about div { text-align: justify; }
-
-/* SERVIÇOS */
-.services {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:30px;
-}
-.card {
-  background:white;
-  border-radius:15px;
-  padding:30px;
-  text-align:center;
-  box-shadow:0 15px 40px rgba(0,0,0,0.15);
-  transform:translateY(40px) scale(0.95);
-  opacity:0;
-  transition:0.5s;
-  border:2px solid transparent;
-}
-.card.show {
-  transform:translateY(0) scale(1);
-  opacity:1;
-}
-.card:hover {
-  transform:translateY(-10px) scale(1.05);
-  box-shadow:0 20px 50px rgba(0,0,0,0.25);
-  border:2px solid #2A8CA5;
-}
-.card img {
-  width:100%;
-  height:160px;
-  object-fit:cover;
-  border-radius:10px;
-  margin-bottom:15px;
-}
-.card h3 {
-  font-size:22px;
-  margin-bottom:10px;
-}
-.card p {
-  font-size:16px;
-  color:#555;
-}
-
-/* PLANOS */
-.planos {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:30px;
-  align-items:stretch;
-}
-.plano {
-  background:white;
-  border-radius:15px;
-  padding:35px;
-  box-shadow:0 8px 25px rgba(0,0,0,0.08);
-  transition:0.4s;
-  border-top:6px solid #F4B400;
-  display:flex;
-  flex-direction:column;
-  height:100%;
-}
-.plano:hover { transform:translateY(-10px); }
-.plano ul { list-style:none; margin:20px 0; flex-grow:1; }
-.plano li { padding:8px 0; border-bottom:1px solid #eee; }
-.plano h3 { margin-bottom:10px; }
-.plano p { margin:5px 0; }
-
-/* DEPOIMENTOS COM CARROSSEL */
-.depoimentos-wrapper {
-  overflow:hidden;
-  width:100%;
-  height:300px;
-  position:relative;
-  margin-top:40px;
-}
-.depoimentos-carousel {
-  display:flex;
-  gap:30px;
-  transition:transform 0.3s linear;
-}
-.depoimento {
-  background:white;
-  border-radius:15px;
-  padding:25px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.1);
-  min-width:280px;
-  flex:0 0 auto;
-  text-align:center;
-  position:relative;
-}
-.depoimento img {
-  width:60px;
-  height:60px;
-  border-radius:50%;
-  object-fit:cover;
-  margin-bottom:10px;
-}
-.estrelas {
-  color:#F4B400;
-  font-size:20px;
-  margin-bottom:10px;
-}
-.depoimento h3 {
-  margin-bottom:10px;
-  color:#2A8CA5;
-}
-.depoimento p {
-  font-size:15px;
-  color:#555;
-}
-
-/* CONTATO */
-.contact {
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  background:#2A8CA5;
-  color:white;
-  text-align:center;
-  padding:150px 20px;
-}
-
-.contact h2 {
-  color: #fff;
-  font-size:36px;
-}
-.contact iframe {
-  margin: auto;
-  width:100%;
-  max-width:500px;
-  height:350px;
-  border:0;
-  border-radius:10px;
-  margin-top:20px;
-}
-.contact .btn {
-  background:#F4B400;
-  color:#333;
-  border-radius:25px;
-  margin-top:20px;
-  font-size:16px;
-  margin:auto;
-  width:200px;
-  height:50px;
-}
-
-/* FOOTER */
-footer {
-  background:#5E6A71;
-  color:white;
-  text-align:center;
-  padding:25px;
-}
-
-/* WHATSAPP */
-.whatsapp {
-  position:fixed;
-  bottom:25px;
-  right:25px;
-  background:#25D366;
-  color:white;
-  padding:18px;
-  border-radius:50%;
-  font-size:22px;
-  text-decoration:none;
-  box-shadow:0 5px 20px rgba(0,0,0,0.3);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.whatsapp img {
-  width:28px;
-  height:28px;
-}
-
-/* HAMBURGUER */
-.menu-toggle {
-  display:none;
-  flex-direction:column;
-  cursor:pointer;
-  gap:5px;
-  justify-content:center; /* centraliza verticalmente */
-  height:80px; /* mesma altura do header */
-}
-.menu-toggle div {
-  width:25px;
-  height:3px;
-  background:#333;
-  transition:0.3s;
-}
-header.scrolled .menu-toggle div { background:white; }
-
-/* RESPONSIVO */
-@media(max-width:900px){
-  .about { 
-    grid-template-columns:1fr; 
-    margin-top:40px; 
-    justify-items:center; /* centraliza conteúdo */
-  }
-  .about video { margin-left:0; } /* centraliza vídeo */
-  .hero h1 { font-size:36px; }
-  nav {
-    position:fixed;
-    top:0;
-    right:-100%;
-    height:100vh;
-    width:250px;
-    background:#2A8CA5;
-    flex-direction:column;
-    align-items:flex-start;
-    padding:100px 20px;
-    gap:20px;
-    transition:0.3s;
-    z-index:999;
-  }
-  nav.active { right:0; }
-  nav a { color:white; font-size:18px; }
-  .menu-toggle { display:flex; }
-}
-</style>
+  <style>
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #090D16;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1E293B;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #06B6D4;
+    }
+    .cyber-grid {
+      background-image: linear-gradient(to right, rgba(6, 182, 212, 0.06) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(6, 182, 212, 0.06) 1px, transparent 1px);
+      background-size: 36px 36px;
+    }
+    .glow-whatsapp {
+      box-shadow: 0 0 24px rgba(37, 211, 102, 0.35);
+    }
+    .glow-whatsapp:hover {
+      box-shadow: 0 0 32px rgba(37, 211, 102, 0.55);
+    }
+    .glow-cyan {
+      box-shadow: 0 0 28px rgba(6, 182, 212, 0.2);
+    }
+    @keyframes pulseRing {
+      0% { transform: scale(0.95); opacity: 0.7; }
+      70% { transform: scale(1.25); opacity: 0; }
+      100% { transform: scale(1.25); opacity: 0; }
+    }
+    .whatsapp-ring::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 9999px;
+      background: #25D366;
+      z-index: -1;
+      animation: pulseRing 2s infinite;
+    }
+  </style>
 </head>
+<body class="bg-brand-dark text-slate-100 font-sans antialiased selection:bg-cyan-500 selection:text-slate-950 overflow-x-hidden">
 
-<body>
+  <!-- Barra Superior Institucional & WhatsApp Direto -->
+  <div class="bg-gradient-to-r from-slate-900 via-cyan-950 to-slate-900 text-white text-xs sm:text-sm py-2 px-4 border-b border-cyan-500/20">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-4 mx-auto sm:mx-0">
+        <span><i class="fa-solid fa-microchip text-cyan-400 mr-1.5"></i><strong>Hardware, Periféricos & Upgrades</strong></span>
+        <span class="hidden md:inline text-slate-600">|</span>
+        <span class="hidden md:inline text-slate-300"><i class="fa-solid fa-location-dot text-cyan-400 mr-1"></i>Franca - SP</span>
+      </div>
+      <a
+        href="https://wa.me/5516988217736?text=Ol%C3%A1%20E.S%20Inform%C3%A1tica!%20Gostaria%20de%20consultar%20hardware%2C%20perif%C3%A9ricos%20ou%20montar%20um%20PC."
+        target="_blank"
+        rel="noopener"
+        class="mx-auto sm:mx-0 inline-flex items-center gap-1.5 text-brand-whatsapp hover:text-emerald-300 font-bold transition-colors"
+      >
+        <i class="fa-brands fa-whatsapp text-base"></i>
+        <span>Atendimento Imediato: (16) 98821-7736</span>
+      </a>
+    </div>
+  </div>
 
-<header id="header">
-<div class="logo">
-<img src="logo.png" alt="Logo E.S Informática">
-<span>E.S Informática</span>
-</div>
-<div class="menu-toggle" id="menu-toggle">
-  <div></div>
-  <div></div>
-  <div></div>
-</div>
-<nav id="nav">
-<a href="#inicio">Início</a>
-<a href="#empresa">Empresa</a>
-<a href="#servicos">Serviços</a>
-<a href="#planos">Planos</a>
-<a href="#depoimentos">Depoimentos</a>
-<a href="#contato">Contato</a>
-</nav>
-</header>
+  <!-- Navbar Fixa -->
+  <header class="sticky top-0 z-40 bg-brand-dark/90 backdrop-blur-lg border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20 gap-4">
 
-<section class="hero" id="inicio">
-<h1>Assistência Técnica em Computadores e Notebooks</h1>
-<p>A E.S. Informática oferece serviços especializados em manutenção preventiva e corretiva de computadores e notebooks, garantindo qualidade, segurança e desempenho para seus equipamentos. Trabalhamos com diagnóstico, limpeza interna, troca de peças e upgrades para deixar seu computador funcionando da melhor forma.</p>
-<a href="https://wa.me/5516988217736?text=Olá%20preciso%20de%20suporte%20em%20TI" class="btn">Entre em contato</a>
-</section>
+        <!-- Logo Oficial E.S Informática -->
+        <a href="#inicio" class="flex items-center gap-3 group shrink-0">
+          <div class="relative w-12 h-12 rounded-xl bg-slate-900 border border-cyan-500/30 flex items-center justify-center overflow-hidden p-1 shadow-lg shadow-cyan-500/10 group-hover:border-cyan-400 transition-all">
+            <img
+              src="https://es-informatica.github.io/Site/logo.png"
+              alt="Logo E.S Informática"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+              class="w-full h-full object-contain"
+            />
+            <span style="display:none;" class="w-full h-full bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg items-center justify-center text-white font-display font-bold text-xl">
+              ES
+            </span>
+          </div>
+          <div>
+            <span class="font-display font-bold text-2xl tracking-wider text-white block leading-none">
+              E.S <span class="text-cyan-400">INFORMÁTICA</span>
+            </span>
+            <span class="text-[11px] uppercase tracking-widest text-slate-400 font-semibold">
+              Hardware • Upgrades • Setups
+            </span>
+          </div>
+        </a>
 
-<section class="section" id="empresa">
-<h2>Sobre a Empresa</h2>
-<div class="about">
-<video src="0ba551027968f23bed74afa794566953_1 (1).mp4" autoplay muted loop playsinline></video>
-<div>
-<p>A E.S Informática é uma empresa especializada em soluções de tecnologia da informação, com foco em suporte técnico, e manutenção.</p>
-<br>
-<p>Atuando com compromisso, agilidade e profissionalismo, oferecemos serviços voltados à estabilidade, segurança e desempenho dos sistemas, garantindo que nossos clientes possam concentrar seus esforços no crescimento de seus negócios sem se preocupar com problemas técnicos.</p>
-<br>
-<p>Nossa equipe é preparada para atender demandas desde manutenções preventivas e corretivas até suporte contínuo em ambientes corporativos, sempre utilizando boas práticas e soluções atualizadas do mercado de TI.</p>
-<br>
-<p>Trabalhamos com transparência, responsabilidade e atendimento personalizado, buscando entender as necessidades específicas de cada cliente para oferecer soluções eficientes e sob medida.</p>
-<br>
-<p>A E.S Informática tem como missão proporcionar suporte tecnológico confiável, contribuindo diretamente para a produtividade e segurança dos clientes atendidos.</p>
-</div>
-</div>
-</section>
+        <!-- Links de Navegação Desktop -->
+        <nav class="hidden lg:flex items-center gap-7 text-sm font-medium text-slate-300">
+          <a href="#inicio" class="hover:text-cyan-400 transition-colors">Início</a>
+          <a href="#catalogo" class="hover:text-cyan-400 transition-colors">Catálogo de Produtos</a>
+          <a href="#monte-seu-pc" class="text-cyan-400 hover:text-cyan-300 font-semibold flex items-center gap-1.5 transition-colors">
+            <i class="fa-solid fa-sliders"></i> Monte Seu PC
+          </a>
+          <a href="#sobre-video" class="hover:text-cyan-400 transition-colors">Estrutura & Vídeo</a>
+          <a href="#avaliacoes" class="hover:text-cyan-400 transition-colors">Clientes (5.0 ★)</a>
+        </nav>
 
-<section class="section" id="servicos">
-<h2>Serviços</h2>
-<div class="services">
-<div class="card">
-<img src="desktop.png" alt="Manutenção de Computadores">
-<h3>Manutenção de Computadores Desktop</h3>
-<p>Diagnóstico, reparos e upgrades.</p>
-</div>
-<div class="card">
-<img src="noot.png" alt="Manutenção de Notebooks">
-<h3>Manutenção de Notebooks</h3>
-<p>Troca de peças e reparos.</p>
-</div>
-<div class="card">
-<img src="suporte.png" alt="Suporte Empresarial">
-<h3>Suporte Empresarial</h3>
-<p>Atendimento técnico especializado.</p>
-</div>
-</div>
-</section>
+        <!-- Botão WhatsApp Enfatizado + Menu Mobile -->
+        <div class="flex items-center gap-2.5">
+          <a
+            href="https://wa.me/5516988217736?text=Ol%C3%A1%20E.S%20Inform%C3%A1tica!%20Quero%20fazer%20uma%20cota%C3%A7%C3%A3o%20de%20pe%C3%A7as%20e%20perif%C3%A9ricos."
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl bg-brand-whatsapp hover:bg-brand-whatsappDark text-slate-950 font-extrabold text-xs sm:text-sm glow-whatsapp transition-all active:scale-95"
+          >
+            <img src="https://es-informatica.github.io/Site/wts.png" alt="WhatsApp" onerror="this.style.display='none'" class="w-5 h-5 object-contain" />
+            <i class="fa-brands fa-whatsapp text-lg sm:hidden"></i>
+            <span>Chamar no WhatsApp</span>
+          </a>
 
-<section class="section" id="planos">
-<br><br><h2>Planos</h2>
-<div class="planos">
+          <button
+            onclick="toggleMobileMenu()"
+            class="lg:hidden p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white"
+            aria-label="Abrir Menu"
+          >
+            <i class="fa-solid fa-bars text-lg"></i>
+          </button>
+        </div>
+      </div>
+    </div>
 
-<div class="plano">
-<h3>Plano Individual</h3>
-<p>Ideal para uso pessoal ou profissionais autônomos</p>
-<p>1 computador ou notebook</p>
-<ul>
-<li>Diagnóstico completo do equipamento</li>
-<li>Limpeza e otimização do sistema</li>
-<li>Remoção de vírus e ameaças</li>
-<li>Instalação de programas essenciais</li>
-<li>Atualizações do sistema</li>
-<li>Suporte remoto quando necessário</li>
-<li>Atendimento sob demanda</li>
-</ul>
-<a href="https://wa.me/5516988217736" class="btn">Solicitar atendimento</a>
-</div>
+    <!-- Menu Mobile -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-slate-900 border-b border-slate-800 px-4 py-4 space-y-2">
+      <a href="#inicio" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded-lg hover:bg-slate-800 text-slate-200 font-medium">Início</a>
+      <a href="#catalogo" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded-lg hover:bg-slate-800 text-slate-200 font-medium">Catálogo de Hardware & Periféricos</a>
+      <a href="#monte-seu-pc" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded-lg bg-cyan-500/10 text-cyan-400 font-semibold">Monte Seu PC (Mercado Livre / Pichau)</a>
+      <a href="#sobre-video" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded-lg hover:bg-slate-800 text-slate-200 font-medium">Sobre & Vídeo</a>
+      <a href="#avaliacoes" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded-lg hover:bg-slate-800 text-slate-200 font-medium">Avaliações de Clientes</a>
+    </div>
+  </header>
 
-<div class="plano">
-<h3>Plano Básico</h3>
-<p>Ideal para empresas pequenas</p>
-<p>Até 3 computadores</p>
-<ul>
-<li>Manutenção preventiva dos computadores</li>
-<li>Limpeza e otimização do sistema</li>
-<li>Atualizações do Microsoft Windows</li>
-<li>Verificação e remoção de vírus</li>
-<li>Suporte remoto quando necessário</li>
-<li>Instalação básica de programas como Microsoft Office</li>
-<li>Sugestão: 1 visita técnica por mês + suporte remoto</li>
-</ul>
-<a href="https://wa.me/5516988217736" class="btn">Solicitar atendimento</a>
-</div>
+  <!-- Hero Section: 100% Focado em Hardware, Periféricos, Upgrades e PCs Sob Medida -->
+  <section id="inicio" class="relative cyber-grid overflow-hidden border-b border-slate-800/80">
+    <div class="absolute -top-24 -left-24 w-96 h-96 bg-cyan-500/15 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute bottom-0 right-0 w-[28rem] h-[28rem] bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
-<div class="plano">
-<h3>Plano Intermediário</h3>
-<p>Ideal para empresas que dependem mais do computador</p>
-<p>Até 5 computadores</p>
-<ul>
-<li>Tudo do plano básico</li>
-<li>Formatação e reinstalação do Microsoft Windows quando necessário</li>
-<li>Instalação e atualização de softwares</li>
-<li>Backup de arquivos importantes</li>
-<li>Instalação de antivírus como Kaspersky ou Avast</li>
-<li>Suporte remoto prioritário</li>
-<li>Sugestão: 2 visitas técnicas por mês + suporte remoto</li>
-</ul>
-<a href="https://wa.me/5516988217736" class="btn">Solicitar atendimento</a>
-</div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
 
-<div class="plano">
-<h3>Plano Premium</h3>
-<p>Ideal para empresas com vários computadores</p>
-<p>Até 8 computadores</p>
-<ul>
-<li>Tudo do plano intermediario</li>
-<li>Diagnóstico e manutenção de hardware</li>
-<li>Limpeza interna dos computadores</li>
-<li>Troca de pasta térmica</li>
-<li>Instalação e configuração de softwares corporativos</li>
-<li>Recuperação de arquivos quando possível</li>
-<li>Atendimento prioritário</li>
-</ul>
-<a href="https://wa.me/5516988217736" class="btn">Solicitar atendimento</a>
-</div>
+        <!-- Texto Principal e CTAs -->
+        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs sm:text-sm font-semibold tracking-wide">
+            <span class="w-2 h-2 rounded-full bg-brand-whatsapp animate-ping"></span>
+            HARDWARE • PERIFÉRICOS • UPGRADES • SETUPS SOB MEDIDA
+          </div>
 
-</div>
-</section>
+          <h1 class="font-display font-bold text-4xl sm:text-5xl lg:text-6xl text-white leading-[1.08] tracking-tight">
+            Alta Performance em <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-emerald-400">Hardware, Periféricos & PCs</span>
+          </h1>
 
-<section class="section" id="depoimentos">
-<h2>Depoimentos</h2>
-<div class="depoimentos-wrapper">
-<div class="depoimentos-carousel" id="carousel">
+          <p class="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+            Na <strong class="text-white">E.S Informática</strong> você encontra placas de vídeo, processadores, kits de upgrade SSD NVMe e memória RAM, periféricos gamer e computadores completos montados sob medida para jogos, trabalho e alta produtividade.
+          </p>
 
-<div class="depoimento"><img src="davi.png" alt=""><div class="estrelas">★★★★★</div><h3>Davi Leandro</h3><p>Recomendo!!<br>Excelente profissional...</p></div>
-<div class="depoimento"><img src="clovis.png" alt=""><div class="estrelas">★★★★★</div><h3>Clóvis Eduardo</h3><p>Serviço de qualidade e preço justo!</p></div>
-<div class="depoimento"><img src="daviv.png" alt=""><div class="estrelas">★★★★★</div><h3>Davi Valentin</h3><p>Ôtimo atendimento!</p></div>
-<div class="depoimento"><img src="gabriel.png" alt=""><div class="estrelas">★★★★★</div><h3>Gabriel Martins</h3><p>RESOLVEU MEU PROBLEMA NA HORA!<br>Melhor de Franca! Virei cliente...</p></div>
-<div class="depoimento"><img src="andreia.png" alt=""><div class="estrelas">★★★★★</div><h3>Andréia Cristina</h3><p>Resposta rápida e serviço eficiente.<br>Obrigado!</p></div>
-<div class="depoimento"><img src="ps.png" alt=""><div class="estrelas">★★★★★</div><h3>Paulo Sérgio</h3><p>Técnico super prestativo,<br>atencioso profissional...</p></div>
-<div class="depoimento"><img src="contexto.png" alt=""><div class="estrelas">★★★★★</div><h3>Contexto</h3><p>Serviço rápido e de ótima qualidade.</p></div>
-<div class="depoimento"><img src="artur.png" alt=""><div class="estrelas">★★★★★</div><h3>Artur Queiroz</h3><p>Um excelente profissional,<br>atencioso no atendimento!</p></div>
-<div class="depoimento"><img src="lucas.png" alt=""><div class="estrelas">★★★★★</div><h3>Lucas Sena</h3><p>Ótimo rapaz, arrumou bem baratinho.<br>Muito bem feito meu notebook...</p></div>
-<div class="depoimento"><img src="pam.png" alt=""><div class="estrelas">★★★★★</div><h3>Pamela Cristina</h3><p>Tive um boa experiência,<br>estava com notebook parado...</p></div>
+          <!-- Botões de Ação Principais -->
+          <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+            <a
+              href="https://wa.me/5516988217736?text=Ol%C3%A1%20E.S%20Inform%C3%A1tica!%20Gostaria%20de%20consultar%20disponibilidade%20de%20pe%C3%A7as%2C%20perif%C3%A9ricos%20ou%20PCs."
+              target="_blank"
+              rel="noopener"
+              class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-7 py-4 rounded-2xl bg-brand-whatsapp hover:bg-brand-whatsappDark text-slate-950 font-extrabold text-base glow-whatsapp transition-all hover:-translate-y-0.5"
+            >
+              <i class="fa-brands fa-whatsapp text-2xl"></i>
+              <span>Solicitar Cotação no WhatsApp</span>
+            </a>
 
-</div>
-</div>
-</section>
+            <a
+              href="#monte-seu-pc"
+              class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-2xl bg-slate-900 hover:bg-slate-800 border border-cyan-500/40 text-white font-bold text-base transition-all"
+            >
+              <i class="fa-solid fa-computer text-cyan-400"></i>
+              <span>Monte Seu PC Agora</span>
+            </a>
+          </div>
 
-<section class="contact h2" id="contato">
-<h2>Localização e Contato</h2><br>
-<p>Rua: Marcos Luiz Badoco, 3344, Apt 32, Jardim Luiza II, Franca - SP</p>
-<p>Telefone/Whatsapp: (16) 98821-7736</p>
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1360.15222466486!2d-47.42237000420855!3d-20.482754866665054!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b0a7fed4eda99f%3A0xe7fd7b61f04757d0!2sAssist%C3%AAncia%20T%C3%A9cnica%20em%20Computadores%20e%20Notebooks%20-%20E.S%20Inform%C3%A1tica%20-%2024%20Horas!5e0!3m2!1spt-BR!2sbr!4v1788984358793!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe><br>
-<a href="https://wa.me/5516988217736?text=Olá%20preciso%20de%20suporte%20em%20TI" class="btn">Atendimento</a>
-</section>
+          <!-- Selos de Confiança -->
+          <div class="grid grid-cols-3 gap-4 pt-6 border-t border-slate-800/80 max-w-xl mx-auto lg:mx-0">
+            <div>
+              <p class="font-display font-bold text-2xl sm:text-3xl text-white">5.0 ★</p>
+              <p class="text-xs text-slate-400">Avaliação dos Clientes</p>
+            </div>
+            <div>
+              <p class="font-display font-bold text-2xl sm:text-3xl text-cyan-400">100%</p>
+              <p class="text-xs text-slate-400">Hardware Selecionado</p>
+            </div>
+            <div>
+              <p class="font-display font-bold text-2xl sm:text-3xl text-brand-whatsapp">Franca-SP</p>
+              <p class="text-xs text-slate-400">Atendimento Ágil</p>
+            </div>
+          </div>
+        </div>
 
-<footer>
-<p>E.S Informática © 2026 | Todos os direitos reservados</p>
-</footer>
+        <!-- Card Lateral com os 3 Recursos Visuais Originais (Desktop, Notebook, Corporativo) -->
+        <div class="lg:col-span-5 space-y-4">
+          <div class="rounded-3xl bg-gradient-to-b from-slate-800/80 to-slate-950 border border-slate-700/80 p-6 glow-cyan">
+            <div class="flex items-center justify-between mb-4">
+              <span class="px-3 py-1 rounded-lg bg-cyan-500/15 border border-cyan-500/30 text-cyan-400 text-xs font-bold uppercase tracking-wider">
+                Linha Completa de Produtos
+              </span>
+              <span class="text-xs text-emerald-400 font-semibold flex items-center gap-1">
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Online Agora
+              </span>
+            </div>
 
-<a href="https://wa.me/5516988217736" class="whatsapp"><img src="wts.png" alt="Whatsapp"></a>
+            <div class="space-y-3.5">
+              <!-- Item 1: desktop.png -->
+              <div class="flex items-center gap-4 p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-cyan-500/50 transition-all">
+                <img
+                  src="https://es-informatica.github.io/Site/desktop.png"
+                  alt="Desktops e PCs Gamer"
+                  onerror="this.src='https://placehold.co/80x80/0F172A/06B6D4?text=PC'"
+                  class="w-14 h-14 rounded-xl object-contain bg-slate-950 p-1.5 border border-slate-800 shrink-0"
+                />
+                <div class="flex-1 min-w-0">
+                  <h3 class="font-bold text-white text-sm sm:text-base">Desktops Gamer & Workstations</h3>
+                  <p class="text-xs text-slate-400">Placas de vídeo RTX/Radeon, processadores Ryzen/Intel e gabinetes.</p>
+                </div>
+              </div>
 
-<script>
-const contato = document.getElementById("contato");
-window.addEventListener("scroll", function(){
-  let header = document.getElementById("header");
-  let contatoTop = contato.getBoundingClientRect().top;
-  if (window.scrollY <= 50) {
-    header.classList.remove("scrolled");
-  } else if (contatoTop <= 100) {
-    header.classList.remove("scrolled");
-  } else {
-    header.classList.add("scrolled");
-  }
-});
+              <!-- Item 2: noot.png -->
+              <div class="flex items-center gap-4 p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-cyan-500/50 transition-all">
+                <img
+                  src="https://es-informatica.github.io/Site/noot.png"
+                  alt="Notebooks e Kits Upgrade"
+                  onerror="this.src='https://placehold.co/80x80/0F172A/06B6D4?text=SSD'"
+                  class="w-14 h-14 rounded-xl object-contain bg-slate-950 p-1.5 border border-slate-800 shrink-0"
+                />
+                <div class="flex-1 min-w-0">
+                  <h3 class="font-bold text-white text-sm sm:text-base">Notebooks, SSDs NVMe & Memórias</h3>
+                  <p class="text-xs text-slate-400">Kits de expansão de velocidade, telas, fontes e acessórios originais.</p>
+                </div>
+              </div>
 
-const cards = document.querySelectorAll(".card");
-const sections = document.querySelectorAll(".section");
-const depoimentos = document.querySelectorAll(".depoimento");
+              <!-- Item 3: suporte.png -->
+              <div class="flex items-center gap-4 p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-cyan-500/50 transition-all">
+                <img
+                  src="https://es-informatica.github.io/Site/suporte.png"
+                  alt="Periféricos e Soluções Corporativas"
+                  onerror="this.src='https://placehold.co/80x80/0F172A/06B6D4?text=PRO'"
+                  class="w-14 h-14 rounded-xl object-contain bg-slate-950 p-1.5 border border-slate-800 shrink-0"
+                />
+                <div class="flex-1 min-w-0">
+                  <h3 class="font-bold text-white text-sm sm:text-base">Periféricos & Equipamentos Office</h3>
+                  <p class="text-xs text-slate-400">Teclados mecânicos, mouses, headsets, monitores e redes.</p>
+                </div>
+              </div>
+            </div>
 
-window.addEventListener("scroll", ()=>{
-  let trigger = window.innerHeight * 0.85;
-  cards.forEach(card=>{
-    let top = card.getBoundingClientRect().top;
-    if(top < trigger){ card.classList.add("show"); }
-  });
-  sections.forEach(sec=>{
-    let top = sec.getBoundingClientRect().top;
-    if(top < trigger){ sec.classList.add("show"); }
-  });
-});
+            <a
+              href="https://wa.me/5516988217736?text=Ol%C3%A1%20E.S%20Inform%C3%A1tica!%20Quero%20saber%20quais%20pe%C3%A7as%20e%20computadores%20voc%C3%AAs%20t%C3%AAm%20dispon%C3%ADveis."
+              target="_blank"
+              rel="noopener"
+              class="mt-5 w-full py-3.5 px-5 rounded-xl bg-brand-whatsapp hover:bg-brand-whatsappDark text-slate-950 font-extrabold text-sm flex items-center justify-center gap-2 transition-all"
+            >
+              <i class="fa-brands fa-whatsapp text-lg"></i>
+              <span>Consultar Catálogo Completo no WhatsApp</span>
+            </a>
+          </div>
+        </div>
 
-// Carrossel automático dos depoimentos
-const carousel = document.getElementById("carousel");
-let scrollAmount = 0;
-function autoScroll(){
-  scrollAmount += 0.3;
-  if(scrollAmount > carousel.scrollWidth - carousel.clientWidth){
-    scrollAmount = 0;
-  }
-  carousel.style.transform = `translateX(-${scrollAmount}px)`;
-  requestAnimationFrame(autoScroll);
-}
-autoScroll();
+      </div>
+    </div>
+  </section>
 
-// Menu hambúrguer
-const menuToggle = document.getElementById("menu-toggle");
-const nav = document.getElementById("nav");
-menuToggle.addEventListener("click", ()=>{
-  nav.classList.toggle("active");
-  menuToggle.classList.toggle("active");
-});
+  <!-- Vitrine de Hardware, Periféricos e Setups (SEM PREÇOS - 100% Foco em Consulta via WhatsApp) -->
+  <section id="catalogo" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+      <div>
+        <span class="text-cyan-400 font-bold text-xs uppercase tracking-widest">Produtos & Soluções de Informática</span>
+        <h2 class="font-display font-bold text-3xl sm:text-4xl text-white mt-1">
+          Hardware, Periféricos & <span class="text-cyan-400">Upgrades</span>
+        </h2>
+        <p class="text-slate-400 text-sm mt-1">
+          Selecione o item desejado e consulte disponibilidade imediata e condições direto com nossa equipe.
+        </p>
+      </div>
 
-// FECHAR MENU AO CLICAR FORA
-document.addEventListener("click", (e)=>{
-  if(!nav.contains(e.target) && !menuToggle.contains(e.target)){
-    nav.classList.remove("active");
-    menuToggle.classList.remove("active");
-  }
-});
-</script>
+      <!-- Filtros de Categoria -->
+      <div id="category-tabs" class="flex flex-wrap gap-2">
+        <button data-cat="Todos" onclick="setCategory('Todos')" class="cat-btn px-4 py-2 rounded-xl text-sm font-bold bg-cyan-500 text-slate-950 transition-all">
+          Todos
+        </button>
+        <button data-cat="Hardware" onclick="setCategory('Hardware')" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-900 text-slate-300 hover:bg-slate-800 border border-slate-800 transition-all">
+          Hardware & Placas
+        </button>
+        <button data-cat="Upgrades" onclick="setCategory('Upgrades')" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-900 text-slate-300 hover:bg-slate-800 border border-slate-800 transition-all">
+          Kits Upgrade (SSD/RAM)
+        </button>
+        <button data-cat="Periféricos" onclick="setCategory('Periféricos')" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-900 text-slate-300 hover:bg-slate-800 border border-slate-800 transition-all">
+          Periféricos Gamer
+        </button>
+        <button data-cat="Computadores" onclick="setCategory('Computadores')" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-900 text-slate-300 hover:bg-slate-800 border border-slate-800 transition-all">
+          PCs Sob Medida
+        </button>
+      </div>
+    </div>
 
+    <!-- Grid de Produtos sem preço -->
+    <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- Renderizado dinamicamente via JS -->
+    </div>
+  </section>
+
+  <!-- ESPAÇO INTERATIVO: MONTE SEU PC (COTAÇÃO MERCADO LIVRE & PICHAU) -->
+  <section id="monte-seu-pc" class="py-16 bg-slate-950/80 border-y border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="rounded-3xl bg-gradient-to-br from-slate-900 via-brand-card to-slate-950 border border-cyan-500/30 p-6 sm:p-10 shadow-2xl">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-8 pb-6 border-b border-slate-800">
+          <div class="max-w-2xl">
+            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/15 text-cyan-400 text-xs font-bold uppercase tracking-wider mb-3">
+              <i class="fa-solid fa-microchip"></i> Configurador Inteligente E.S Informática
+            </span>
+            <h2 class="font-display font-bold text-3xl sm:text-4xl text-white">
+              Monte Seu PC com <span class="text-cyan-400">Referência Mercado Livre & Pichau</span>
+            </h2>
+            <p class="text-slate-400 text-sm sm:text-base mt-2">
+              Escolha cada componente abaixo com base nos valores aproximados das principais plataformas do Brasil (<strong class="text-amber-400">Mercado Livre</strong> e <strong class="text-rose-400">Pichau</strong>) e envie sua configuração pronta para nosso WhatsApp!
+            </p>
+          </div>
+
+          <!-- Selos das Plataformas de Referência -->
+          <div class="flex flex-wrap items-center gap-3 shrink-0">
+            <span class="px-3.5 py-2 rounded-xl bg-amber-400/10 border border-amber-400/30 text-amber-300 text-xs font-bold flex items-center gap-2">
+              <i class="fa-solid fa-handshake"></i> Ref. Mercado Livre
+            </span>
+            <span class="px-3.5 py-2 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs font-bold flex items-center gap-2">
+              <i class="fa-solid fa-fire"></i> Ref. Pichau Hardware
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <!-- Coluna de Seleção de Peças (6 categorias completas) -->
+          <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+            <!-- 1. Processador -->
+            <div class="bg-slate-950/90 p-4 rounded-2xl border border-slate-800 hover:border-cyan-500/40 transition-colors">
+              <div class="flex items-center justify-between mb-2">
+                <label for="pc-cpu" class="text-xs font-bold uppercase tracking-wider text-cyan-400">
+                  <i class="fa-solid fa-microchip mr-1"></i> 1. Processador (CPU)
+                </label>
+                <a id="link-cpu" href="https://lista.mercadolivre.com.br/ryzen-5-5600" target="_blank" rel="noopener" class="text-[11px] text-slate-400 hover:text-cyan-400 underline">
+                  Ver na loja <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+                </a>
+              </div>
+              <select id="pc-cpu" onchange="updatePcBuilder()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-sm text-white focus:border-cyan-500 focus:outline-none">
+                <option value="0" data-name="Sem processador" data-source="-" data-url="https://lista.mercadolivre.com.br/processador">Não selecionar (R$ 0)</option>
+                <option value="830" data-name="AMD Ryzen 5 5600 (6-Core)" data-source="Pichau" data-url="https://www.pichau.com.br/search?q=ryzen%205%205600" selected>Ryzen 5 5600 • ~R$ 830 (Pichau)</option>
+                <option value="1480" data-name="AMD Ryzen 7 5700X3D Gamer" data-source="Mercado Livre" data-url="https://lista.mercadolivre.com.br/ryzen-7-5700x3d">Ryzen 7 5700X3D • ~R$ 1.480 (Mercado Livre)</option>
+                <option value="1150" data-name="Intel Core i5-12400F" data-source="Pichau" data-url="https://www.pichau.com.br/search?q=i5%2012400f">Intel Core i5-12400F • ~R$ 1.150 (Pichau)</option>
+                <option value="2690" data-name="AMD Ryzen 7 7800X3D AM5" data-source="Mercado Livre" data-url="https://lista.mercadolivre.com.br/ryzen-7-7800x3d">Ryzen 7 7800X3D AM5 • ~R$ 2.690 (Mercado Livre)</option>
+              </select>
+            </div>
+
+            <!-- 2. Placa-Mãe -->
+            <div class="bg-slate-950/90 p-4 rounded-2xl border border-slate-800 hover:border-cyan-500/40 transition-colors">
+              <div class="flex items-center justify-between mb-2">
+                <label for="pc-mobo" class="text-xs font-bold uppercase tracking-wider text-cyan-400">
+                  <i class="fa-solid fa-chess-board mr-1"></i> 2. Placa-Mãe
+                </label>
+                <a id="link-mobo" href="https://www.pichau.com.br/search?q=placa%20mae%20b550m" target="_blank" rel="noopener" class="text-[11px] text-slate-400 hover:text-cyan-400 underline">
+                  Ver na loja <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+                </a>
+              </div>
+              <select id="pc-mobo" onchange="updatePcBuilder()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-sm text-white focus:border-cyan-500 focus:outline-none">
+                <option value="0" data-name="Sem placa-mãe" data-source="-" data-url="https://www.pichau.com.br">Não selecionar (R$ 0)</option>
+                <option value="490" data-name="Placa-Mãe A520M DDR4" data-source="Mercado Livre" data-url="https://lista.mercadolivre.com.br/placa-mae-a520m">Placa-Mãe A520M • ~R$ 490 (Mercado Livre)</option>
+                <option value="690" data-name="Placa-Mãe B550M Pro AM4" data-source="Pichau" data-url="https://www.pichau.com.br/search?q=placa%20mae%20b550m" selected>Placa-Mãe B550M Pro • ~R$ 690 (Pichau)</option>
+                <option value="780" data-name="Placa-Mãe B760M LGA1700" data-source="Mercado Livre" data-url="https://lista.mercadolivre.com.br/placa-mae-b760m">Placa-Mãe B760M • ~R$ 780 (Mercado Livre)</option>
+                <option value="1190" data-name="Placa-Mãe B650M DDR5 AM5" data-source="Pichau" data-url="https://www.pichau.com.br/search?q=placa%20mae%20b650m">Placa-Mãe B650M DDR5 • ~R$ 1.190 (Pichau)</option>
+              </select>
+            </div>
+
+            <!-- 3. Placa de Vídeo -->
+            <div class="bg-slate-950/90 p-4 rounded-2xl border border-slate-800 hover:border-cyan-500/40 transition-colors">
+              <div class="flex items-center justify-between mb-2">
+                <label for="pc-gpu" class="text-xs font-bold uppercase tracking-wider text-cyan-400">
+                  <i class="fa-solid fa-tv mr-1"></i> 3. Placa de Vídeo (GPU)
+                </label>
+                <a id="link-gpu" href="https://www.pichau.com.br/search?q=rtx%204060" target="_blank" rel="noopener" class="text-[11px] text-slate-400 hover:text-cyan-400 underline">
+                  Ver na loja <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+                </a>
+              </div>
+              <select id="pc-gpu" onchange="updatePcBuilder()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-sm text-white focus:border-cyan-500 focus:outline-none">
+                <option value="0" data-name="Vídeo Integrado / Sem GPU" data-source="-" data-url="https://www.pichau.com.br">Vídeo Integrado / Sem GPU (R$ 0)</option>
+                <option value="1490" data-name="AMD Radeon RX 6600 8GB" data-source="Pichau" data-url="https://www.pichau.com.br/search?q=rx%206600">Radeon RX 6600 8GB • ~R$ 1.490 (Pichau)</option>
+                <option value="2090" data-name="NVIDIA GeForce RTX 4060 8GB" data-source="Pichau" data-url="https://www.pichau.com.br/search?q=rtx%204060" selected>GeForce RTX 4060 8GB • ~R$ 2.090 (Pichau)</option>
+                <option value="2890" data-name="NVIDIA GeForce RTX 4060 Ti 8GB" data-source="Mercado Livre" data-url="https://lista.mercadolivre.com.br/rtx-4060-ti">GeForce RTX 4060 Ti • ~R$ 2.890 (Mercado Livre)</option>
+                <option value="4290" data-name="NVIDIA GeForce RTX 4070 Super 12GB" data-source="Mercado Livre" data-url="https://lista.mercadolivre.com.br/rtx-4070-super">RTX 4070 Super 12GB • ~R$ 4.290 (Mercado Livre)</option>
+              </select>
+            </div>
+
+            <!-- 4. Memória RAM -->
+            <div class="bg-slate-950/90 p-4 rounded-2xl border border-slate-800 hover:border-cyan-500/40 transition-colors">
+              <div class="flex items-center justify-between mb-2">
+                <label for="pc-ram" class="text-xs font-bold uppercase tracking-wider text-cyan-400">
+                  <i class="fa-solid fa-memory mr-1"></i> 4. Memória RAM
+                </label>
+                <a id="link-ram" href="https://lista.mercadolivre.com.br/memoria-ram-16gb-ddr4" target="_blank" rel="noopener" class="text-[11px] text-slate-400 hover:text-cyan-400 underline">
+                  Ver na loja <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+                </a>
+              </div>
+              <select id="pc-ram" onchange="updatePcBuilder()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-sm text-white focus:border-cyan-500 focus:outline-none">
+                <option value="0" data-name="Sem memória RAM" data-source="-" data-url="https://lista.mercadolivre.com.br/memoria-ram">Não selecionar (R$ 0)</option>
+                <option value="270" data-name="16GB (2x8GB) DDR4 3200MHz" data-source="Mercado Livre" data-url="https://lista.mercadolivre.com.br/memoria-ram-16gb-ddr4" selected>16GB (2x8GB) DDR4 • ~R$ 270 (Mercado Livre)</option>
+                <option value="510" data-name="32GB (2x16GB) DDR4 3200MHz" data-source="Pichau" data-url="https://www.pichau.com.br/search?q=memoria%2032gb%20ddr4">32GB (2x16GB) DDR4 • ~R$ 510 (Pichau)</option>
+                <option value="850" data-name="32GB (2x16GB) DDR5 6000MHz" data-source="Mercado Livre" data-url="https://lista.mercadolivre.com.br/memoria-ram-32gb-ddr5">32GB (2x16GB) DDR5 • ~R$ 850 (Mercado Livre)</option>
+              </select>
+            </div>
+
+            <!-- 5. Armazenamento SSD -->
+            <div class="bg-slate-950/90 p-4 rounded-2xl border border-slate-800 hover:border-cyan-500/40 transition-colors">
+              <div class="flex items-center justify-between mb-2">
+                <label for="pc-ssd" class="text-xs font-bold uppercase tracking-wider text-cyan-400">
+                  <i class="fa-solid fa-hard-drive mr-1"></i> 5. SSD NVMe M.2
+                </label>
+                <a id="link-ssd" href="https://lista.mercadolivre.com.br/ssd-nvme-1tb" target="_blank" rel="noopener" class="text-[11px] text-slate-400 hover:text-cyan-400 underline">
+                  Ver na loja <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+                </a>
+              </div>
+              <select id="pc-ssd" onchange="updatePcBuilder()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-sm text-white focus:border-cyan-500 focus:outline-none">
+                <option value="0" data-name="Sem SSD" data-source="-" data-url="https://lista.mercadolivre.com.br/ssd-nvme">Não selecionar (R$ 0)</option>
+                <option value="260" data-name="SSD NVMe 500GB PCIe 4.0" data-source="Pichau" data-url="https://www.pichau.com.br/search?q=ssd%20nvme%20500gb">SSD NVMe 500GB • ~R$ 260 (Pichau)</option>
+                <option value="430" data-name="SSD NVMe 1TB Kingston NV2" data-source="Mercado Livre" data-url="https://lista.mercadolivre.com.br/ssd-nvme-1tb" selected>SSD NVMe 1TB • ~R$ 430 (Mercado Livre)</option>
+                <option value="780" data-name="SSD NVMe 2TB Alta Velocidade" data-source="Mercado Livre" data-url="https://lista.mercadolivre.com.br/ssd-nvme-2tb">SSD NVMe 2TB • ~R$ 780 (Mercado Livre)</option>
+              </select>
+            </div>
+
+            <!-- 6. Fonte & Gabinete -->
+            <div class="bg-slate-950/90 p-4 rounded-2xl border border-slate-800 hover:border-cyan-500/40 transition-colors">
+              <div class="flex items-center justify-between mb-2">
+                <label for="pc-case" class="text-xs font-bold uppercase tracking-wider text-cyan-400">
+                  <i class="fa-solid fa-plug-circle-bolt mr-1"></i> 6. Fonte + Gabinete Gamer
+                </label>
+                <a id="link-case" href="https://www.pichau.com.br/search?q=gabinete%20gamer" target="_blank" rel="noopener" class="text-[11px] text-slate-400 hover:text-cyan-400 underline">
+                  Ver na loja <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+                </a>
+              </div>
+              <select id="pc-case" onchange="updatePcBuilder()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-sm text-white focus:border-cyan-500 focus:outline-none">
+                <option value="0" data-name="Sem Fonte/Gabinete" data-source="-" data-url="https://www.pichau.com.br">Não selecionar (R$ 0)</option>
+                <option value="540" data-name="Fonte 600W 80 Plus + Gabinete RGB" data-source="Pichau" data-url="https://www.pichau.com.br/search?q=gabinete%20gamer" selected>Fonte 600W + Gabinete RGB • ~R$ 540 (Pichau)</option>
+                <option value="790" data-name="Fonte 750W 80 Plus Bronze + Gabinete Aquário" data-source="Mercado Livre" data-url="https://lista.mercadolivre.com.br/gabinete-aquario">Fonte 750W + Gabinete Aquário • ~R$ 790 (Mercado Livre)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Painel Resumo da Configuração + Botão WhatsApp -->
+          <div class="lg:col-span-5 bg-slate-950 border border-cyan-500/30 rounded-2xl p-6 flex flex-col justify-between shadow-xl">
+            <div>
+              <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
+                <h3 class="font-display font-bold text-xl text-white">
+                  Resumo do Seu Setup
+                </h3>
+                <span class="text-[11px] px-2.5 py-1 rounded-md bg-slate-900 text-cyan-400 border border-slate-800 font-semibold">
+                  Base ML / Pichau
+                </span>
+              </div>
+
+              <ul id="pc-summary-list" class="space-y-2.5 text-xs sm:text-sm text-slate-300 mb-6">
+                <!-- Preenchido via JS -->
+              </ul>
+            </div>
+
+            <div class="pt-4 border-t border-slate-800">
+              <div class="flex items-center justify-between text-xs text-slate-400">
+                <span>Investimento Aproximado nas Plataformas:</span>
+              </div>
+              <div id="pc-total-estimate" class="font-display font-bold text-3xl sm:text-4xl text-cyan-400 my-1">
+                ~ R$ 4.850,00
+              </div>
+              <p class="text-[11px] text-slate-400 mb-5 leading-relaxed">
+                *Valores aproximados de referência (Mercado Livre / Pichau). Envie sua lista para a <strong class="text-white">E.S Informática</strong> validar compatibilidade e fechar sua montagem ou compra.
+              </p>
+
+              <button
+                onclick="sendPcBuildWhatsApp()"
+                class="w-full py-4 px-5 rounded-xl bg-brand-whatsapp hover:bg-brand-whatsappDark text-slate-950 font-extrabold text-sm sm:text-base flex items-center justify-center gap-2.5 glow-whatsapp transition-all active:scale-95"
+              >
+                <i class="fa-brands fa-whatsapp text-xl"></i>
+                <span>Enviar Configuração no WhatsApp</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vídeo Institucional & Estrutura E.S Informática -->
+  <section id="sobre-video" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+      <!-- Player de Vídeo Original do Site -->
+      <div class="lg:col-span-6">
+        <div class="relative rounded-3xl overflow-hidden bg-slate-900 border border-cyan-500/30 shadow-2xl glow-cyan">
+          <div class="aspect-video w-full bg-slate-950 relative">
+            <video
+              src="https://es-informatica.github.io/Site/0ba551027968f23bed74afa794566953_1%20(1).mp4"
+              controls
+              autoplay
+              loop
+              muted
+              playsinline
+              class="w-full h-full object-cover"
+            >
+              Seu navegador não suporta a reprodução de vídeo.
+            </video>
+          </div>
+          <div class="px-5 py-3.5 bg-slate-950 border-t border-slate-800 flex items-center justify-between text-xs">
+            <span class="text-cyan-400 font-bold"><i class="fa-solid fa-play-circle mr-1.5"></i> E.S Informática em Ação</span>
+            <span class="text-slate-400">Montagem, Upgrades & Performance</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Texto Institucional focado em Hardware e Soluções -->
+      <div class="lg:col-span-6 space-y-5">
+        <span class="text-cyan-400 font-bold text-xs uppercase tracking-widest">Sobre a E.S Informática</span>
+        <h2 class="font-display font-bold text-3xl sm:text-4xl text-white leading-tight">
+          Especialistas em <span class="text-cyan-400">Montagem de Setups, Upgrades</span> e Tecnologia em Franca - SP
+        </h2>
+        <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+          A <strong class="text-white">E.S Informática</strong> atua com foco total em entregar o máximo desempenho para o seu computador ou notebook. Trabalhamos com seleção de peças de alta qualidade, periféricos modernos, kits de expansão com SSDs NVMe e montagem personalizada para gamers, criadores de conteúdo e empresas.
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+          <div class="p-4 rounded-2xl bg-brand-card border border-slate-800">
+            <i class="fa-solid fa-bolt text-cyan-400 text-xl mb-2"></i>
+            <h4 class="font-bold text-white text-sm">Consultoria de Peças</h4>
+            <p class="text-xs text-slate-400 mt-1">Indicamos exatamente o hardware compatível com seu orçamento e objetivo.</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-brand-card border border-slate-800">
+            <i class="fa-solid fa-award text-brand-whatsapp text-xl mb-2"></i>
+            <h4 class="font-bold text-white text-sm">Qualidade Comprovada</h4>
+            <p class="text-xs text-slate-400 mt-1">Nota máxima nas avaliações de clientes reais em Franca e região.</p>
+          </div>
+        </div>
+
+        <div class="pt-3">
+          <a
+            href="https://wa.me/5516988217736?text=Ol%C3%A1%20E.S%20Inform%C3%A1tica!%20Vi%20o%20v%C3%ADdeo%20no%20site%20e%20gostaria%20de%20um%20atendimento."
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-brand-whatsapp hover:bg-brand-whatsappDark text-slate-950 font-extrabold text-sm glow-whatsapp transition-all"
+          >
+            <i class="fa-brands fa-whatsapp text-lg"></i>
+            <span>Falar Diretamente pelo WhatsApp</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Depoimentos Reais de Clientes (Com as 10 Imagens Oficiais do Site) -->
+  <section id="avaliacoes" class="py-16 bg-slate-950/70 border-t border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <div class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-400 text-xs font-bold mb-3">
+          <span>★★★★★</span>
+          <span>5.0 DE SATISFAÇÃO</span>
+        </div>
+        <h2 class="font-display font-bold text-3xl sm:text-4xl text-white">
+          O Que Nossos <span class="text-cyan-400">Clientes Dizem</span>
+        </h2>
+        <p class="text-slate-400 text-sm sm:text-base mt-2">
+          Avaliações reais de clientes que confiam no trabalho, agilidade e atendimento da E.S Informática.
+        </p>
+      </div>
+
+      <!-- Grid Responsivo com os 10 Clientes Reais -->
+      <div id="testimonials-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+        <!-- Renderizado via JS com todas as 10 fotos originais -->
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Final WhatsApp -->
+  <section class="py-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="rounded-3xl bg-gradient-to-r from-emerald-950/80 via-slate-900 to-cyan-950/80 border border-emerald-500/30 p-8 sm:p-12 text-center relative overflow-hidden">
+      <div class="max-w-2xl mx-auto relative z-10 space-y-5">
+        <span class="inline-block px-3.5 py-1 rounded-full bg-brand-whatsapp/20 text-brand-whatsapp text-xs font-extrabold uppercase tracking-wider">
+          Atendimento Rápido e Personalizado
+        </span>
+        <h2 class="font-display font-bold text-3xl sm:text-4xl text-white">
+          Pronto para Turbinar Seu Setup ou Adquirir Seu Novo PC?
+        </h2>
+        <p class="text-slate-300 text-sm sm:text-base">
+          Chame agora no WhatsApp da E.S Informática, tire suas dúvidas sobre peças, periféricos ou upgrades e receba atendimento imediato.
+        </p>
+        <div class="pt-2">
+          <a
+            href="https://wa.me/5516988217736?text=Ol%C3%A1%20E.S%20Inform%C3%A1tica!%20Gostaria%20de%20fazer%20um%20or%C3%A7amento."
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-brand-whatsapp hover:bg-brand-whatsappDark text-slate-950 font-extrabold text-base sm:text-lg glow-whatsapp transition-all hover:scale-105"
+          >
+            <i class="fa-brands fa-whatsapp text-2xl"></i>
+            <span>Conversar no WhatsApp (16) 98821-7736</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer com Endereço Oficial de Franca - SP -->
+  <footer class="bg-slate-950 border-t border-slate-800 pt-14 pb-10 text-slate-400 text-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 pb-10 border-b border-slate-800/80">
+        <!-- Logo e Descrição -->
+        <div class="space-y-4">
+          <div class="flex items-center gap-3">
+            <img
+              src="https://es-informatica.github.io/Site/logo.png"
+              alt="E.S Informática"
+              onerror="this.style.display='none'"
+              class="w-10 h-10 object-contain rounded-lg bg-slate-900 p-1 border border-slate-800"
+            />
+            <span class="font-display font-bold text-xl text-white tracking-wider">
+              E.S <span class="text-cyan-400">INFORMÁTICA</span>
+            </span>
+          </div>
+          <p class="text-xs leading-relaxed text-slate-400">
+            Especializada em hardware, periféricos gamer, kits de upgrade e montagem de computadores personalizados de alta performance.
+          </p>
+        </div>
+
+        <!-- Links Rápidos -->
+        <div>
+          <h4 class="font-bold text-white uppercase tracking-wider text-xs mb-4">Navegação</h4>
+          <ul class="space-y-2.5 text-xs">
+            <li><a href="#inicio" class="hover:text-cyan-400 transition-colors">Início</a></li>
+            <li><a href="#catalogo" class="hover:text-cyan-400 transition-colors">Hardware & Periféricos</a></li>
+            <li><a href="#monte-seu-pc" class="hover:text-cyan-400 transition-colors">Monte Seu PC (Mercado Livre & Pichau)</a></li>
+            <li><a href="#sobre-video" class="hover:text-cyan-400 transition-colors">Vídeo & Estrutura</a></li>
+            <li><a href="#avaliacoes" class="hover:text-cyan-400 transition-colors">Avaliações de Clientes</a></li>
+          </ul>
+        </div>
+
+        <!-- Localização e Contato Oficial -->
+        <div>
+          <h4 class="font-bold text-white uppercase tracking-wider text-xs mb-4">Contato & Localização</h4>
+          <ul class="space-y-3 text-xs">
+            <li class="flex items-start gap-2.5">
+              <i class="fa-brands fa-whatsapp text-brand-whatsapp text-base mt-0.5"></i>
+              <a href="https://wa.me/5516988217736" target="_blank" rel="noopener" class="hover:text-white transition-colors">
+                WhatsApp: <strong class="text-white">(16) 98821-7736</strong>
+              </a>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <i class="fa-solid fa-location-dot text-cyan-400 text-sm mt-0.5"></i>
+              <span>Rua: Marcos Luiz Badoco, 3344, Apt 32<br>Jardim Luiza II, Franca - SP</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+        <p>&copy; 2026 E.S Informática. Todos os direitos reservados.</p>
+        <p>Franca - São Paulo • Hardware, Periféricos & Setups</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Botão Flutuante do WhatsApp (Usando o ícone wts.png oficial + Pulso) -->
+  <a
+    href="https://wa.me/5516988217736?text=Ol%C3%A1%20E.S%20Inform%C3%A1tica!%20Vim%20pelo%20site%20e%20gostaria%20de%20atendimento."
+    target="_blank"
+    rel="noopener"
+    aria-label="Falar no WhatsApp"
+    class="fixed bottom-5 right-5 z-50 whatsapp-ring flex items-center gap-2.5 bg-brand-whatsapp hover:bg-brand-whatsappDark text-slate-950 font-extrabold px-4 py-3 rounded-full shadow-2xl transition-transform hover:scale-105"
+  >
+    <img
+      src="https://es-informatica.github.io/Site/wts.png"
+      alt="WhatsApp"
+      onerror="this.style.display='none'"
+      class="w-7 h-7 object-contain"
+    />
+    <span class="hidden sm:inline text-sm">Orçamento WhatsApp</span>
+  </a>
+
+  <!-- Scripts: Catálogo Sem Preço, Configurador ML/Pichau e Depoimentos Reais -->
+  <script>
+    const WHATSAPP_NUMBER = "5516988217736";
+
+    // Vitrine de Hardware, Periféricos e Upgrades (SEM PREÇOS FIXOS)
+    const catalogProducts = [
+      {
+        name: "Placas de Vídeo NVIDIA RTX & AMD Radeon",
+        category: "Hardware",
+        tag: "Sob Encomenda / Pronta Entrega",
+        specs: "Modelos RTX 4060, 4060 Ti, 4070 Super e RX 6600/7600 para jogos em Full HD, QHD e 4K.",
+        image: "https://es-informatica.github.io/Site/desktop.png",
+        fallback: "https://placehold.co/500x340/111827/06B6D4?text=PLACAS+DE+VIDEO+RTX"
+      },
+      {
+        name: "Processadores AMD Ryzen & Intel Core",
+        category: "Hardware",
+        tag: "Alta Performance",
+        specs: "Linha Ryzen 5, Ryzen 7 X3D e Intel Core de última geração para máximo FPS e multitarefa.",
+        image: "https://images.unsplash.com/photo-1555617981-dac3880eac6e?auto=format&fit=crop&w=600&q=80",
+        fallback: "https://placehold.co/500x340/111827/06B6D4?text=PROCESSADORES+RYZEN+%26+INTEL"
+      },
+      {
+        name: "Kit Upgrade SSD NVMe + Memória RAM",
+        category: "Upgrades",
+        tag: "Mais Procurado",
+        specs: "Deixe seu PC ou notebook até 10x mais rápido com SSDs NVMe Gen4 e memórias DDR4 / DDR5.",
+        image: "https://es-informatica.github.io/Site/noot.png",
+        fallback: "https://placehold.co/500x340/111827/06B6D4?text=KIT+UPGRADE+SSD+%26+RAM"
+      },
+      {
+        name: "Teclados Mecânicos, Mouses & Headsets Gamer",
+        category: "Periféricos",
+        tag: "Linha Gamer & Office",
+        specs: "Periféricos com switches mecânicos, sensores ópticos de precisão, wireless e iluminação RGB.",
+        image: "https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&w=600&q=80",
+        fallback: "https://placehold.co/500x340/111827/06B6D4?text=PERIFERICOS+GAMER"
+      },
+      {
+        name: "Computadores Gamer & Workstations Sob Medida",
+        category: "Computadores",
+        tag: "Projeto Personalizado",
+        specs: "Montagem completa e organizada com peças selecionadas para jogos competitivos, edição ou escritório.",
+        image: "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=600&q=80",
+        fallback: "https://placehold.co/500x340/111827/06B6D4?text=COMPUTADORES+SOB+MEDIDA"
+      },
+      {
+        name: "Placas-Mãe, Fontes 80 Plus & Gabinetes",
+        category: "Hardware",
+        tag: "Componentes Originais",
+        specs: "Placas-mãe B550, B650, B760, fontes certificadas com PFC ativo e gabinetes com ótimo airflow.",
+        image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80",
+        fallback: "https://placehold.co/500x340/111827/06B6D4?text=PLACAS+MAE+%26+FONTES"
+      },
+      {
+        name: "Monitores Gamer Alta Taxa & Suportes",
+        category: "Periféricos",
+        tag: "144Hz / 180Hz / 240Hz",
+        specs: "Monitores IPS/VA com tempo de resposta de 1ms, suportes articulados e cabos DisplayPort/HDMI.",
+        image: "https://es-informatica.github.io/Site/suporte.png",
+        fallback: "https://placehold.co/500x340/111827/06B6D4?text=MONITORES+%26+ACESSORIOS"
+      },
+      {
+        name: "Kits Upgrade Placa-Mãe + Processador + RAM",
+        category: "Upgrades",
+        tag: "Combo Compatível",
+        specs: "Kits pré-testados e 100% compatíveis para renovar a base do seu computador sem gargalos.",
+        image: "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=600&q=80",
+        fallback: "https://placehold.co/500x340/111827/06B6D4?text=COMBO+UPGRADE"
+      }
+    ];
+
+    // Os 10 Clientes Reais e Imagens Originais de https://es-informatica.github.io/Site/
+    const customerReviews = [
+      {
+        name: "Davi Leandro",
+        avatar: "https://es-informatica.github.io/Site/davi.png",
+        text: "Recomendo!! Excelente profissional..."
+      },
+      {
+        name: "Clóvis Eduardo",
+        avatar: "https://es-informatica.github.io/Site/clovis.png",
+        text: "Serviço de qualidade e preço justo!"
+      },
+      {
+        name: "Davi Valentin",
+        avatar: "https://es-informatica.github.io/Site/daviv.png",
+        text: "Ôtimo atendimento!"
+      },
+      {
+        name: "Gabriel Martins",
+        avatar: "https://es-informatica.github.io/Site/gabriel.png",
+        text: "RESOLVEU MEU PROBLEMA NA HORA! Melhor de Franca! Virei cliente..."
+      },
+      {
+        name: "Andréia Cristina",
+        avatar: "https://es-informatica.github.io/Site/andreia.png",
+        text: "Resposta rápida e serviço eficiente. Obrigado!"
+      },
+      {
+        name: "Paulo Sérgio",
+        avatar: "https://es-informatica.github.io/Site/ps.png",
+        text: "Técnico super prestativo, atencioso profissional..."
+      },
+      {
+        name: "Contexto",
+        avatar: "https://es-informatica.github.io/Site/contexto.png",
+        text: "Serviço rápido e de ótima qualidade."
+      },
+      {
+        name: "Artur Queiroz",
+        avatar: "https://es-informatica.github.io/Site/artur.png",
+        text: "Um excelente profissional, atencioso no atendimento!"
+      },
+      {
+        name: "Lucas Sena",
+        avatar: "https://es-informatica.github.io/Site/lucas.png",
+        text: "Ótimo rapaz, arrumou bem baratinho. Muito bem feito meu notebook..."
+      },
+      {
+        name: "Pamela Cristina",
+        avatar: "https://es-informatica.github.io/Site/pam.png",
+        text: "Tive um boa experiência, estava com notebook parado..."
+      }
+    ];
+
+    let currentCategory = 'Todos';
+
+    function renderCatalog() {
+      const grid = document.getElementById('products-grid');
+      const filtered = currentCategory === 'Todos'
+        ? catalogProducts
+        : catalogProducts.filter(item => item.category === currentCategory);
+
+      grid.innerHTML = filtered.map(item => {
+        const waMsg = encodeURIComponent(`Olá E.S Informática! Gostaria de consultar disponibilidade e valores para: *${item.name}*.`);
+        const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${waMsg}`;
+
+        return `
+          <article class="group bg-brand-card rounded-2xl border border-slate-800 hover:border-cyan-500/50 overflow-hidden flex flex-col justify-between transition-all duration-300 hover:-translate-y-1">
+            <div>
+              <div class="relative aspect-[16/10] bg-slate-950 overflow-hidden p-3 flex items-center justify-center border-b border-slate-800/80">
+                <span class="absolute top-3 left-3 z-10 px-2.5 py-1 rounded-lg bg-cyan-500/15 border border-cyan-500/30 text-cyan-300 font-bold text-[10px] uppercase tracking-wider">
+                  ${item.tag}
+                </span>
+                <img
+                  src="${item.image}"
+                  alt="${item.name}"
+                  onerror="this.src='${item.fallback}'"
+                  class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500 rounded-lg"
+                />
+              </div>
+
+              <div class="p-5">
+                <span class="text-[11px] font-bold uppercase tracking-wider text-cyan-400">${item.category}</span>
+                <h3 class="font-bold text-white text-base leading-snug mt-1">
+                  ${item.name}
+                </h3>
+                <p class="text-xs text-slate-400 mt-2 leading-relaxed">
+                  ${item.specs}
+                </p>
+              </div>
+            </div>
+
+            <div class="px-5 pb-5 pt-2">
+              <a
+                href="${waUrl}"
+                target="_blank"
+                rel="noopener"
+                class="w-full py-3 px-4 rounded-xl bg-brand-whatsapp hover:bg-brand-whatsappDark text-slate-950 font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/15 transition-all active:scale-95"
+              >
+                <i class="fa-brands fa-whatsapp text-base"></i>
+                <span>Consultar no WhatsApp</span>
+              </a>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    function setCategory(cat) {
+      currentCategory = cat;
+      document.querySelectorAll('.cat-btn').forEach(btn => {
+        if (btn.dataset.cat === cat) {
+          btn.className = 'cat-btn px-4 py-2 rounded-xl text-sm font-bold bg-cyan-500 text-slate-950 transition-all';
+        } else {
+          btn.className = 'cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-900 text-slate-300 hover:bg-slate-800 border border-slate-800 transition-all';
+        }
+      });
+      renderCatalog();
+    }
+
+    function renderTestimonials() {
+      const grid = document.getElementById('testimonials-grid');
+      grid.innerHTML = customerReviews.map(rev => `
+        <div class="bg-brand-card border border-slate-800 hover:border-cyan-500/40 rounded-2xl p-5 flex flex-col justify-between transition-all">
+          <div>
+            <div class="flex items-center gap-3 mb-3">
+              <img
+                src="${rev.avatar}"
+                alt="${rev.name}"
+                onerror="this.src='https://placehold.co/64x64/1E293B/06B6D4?text=${encodeURIComponent(rev.name.charAt(0))}'"
+                class="w-12 h-12 rounded-full object-cover border-2 border-cyan-500/50 shrink-0 bg-slate-900"
+              />
+              <div class="min-w-0">
+                <h4 class="font-bold text-white text-sm truncate">${rev.name}</h4>
+                <div class="text-amber-400 text-xs tracking-tight">★★★★★</div>
+              </div>
+            </div>
+            <p class="text-xs text-slate-300 italic leading-relaxed">
+              "${rev.text}"
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-800/70 flex items-center justify-between text-[10px] text-slate-500">
+            <span>Cliente Verificado</span>
+            <span class="text-emerald-400 font-semibold"><i class="fa-solid fa-circle-check mr-1"></i>Franca-SP</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Configurador Monte Seu PC (Referência Mercado Livre & Pichau)
+    function formatBRL(val) {
+      return val.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    }
+
+    function updatePcBuilder() {
+      const fields = [
+        { selectId: 'pc-cpu', linkId: 'link-cpu', label: 'CPU' },
+        { selectId: 'pc-mobo', linkId: 'link-mobo', label: 'Placa-Mãe' },
+        { selectId: 'pc-gpu', linkId: 'link-gpu', label: 'GPU' },
+        { selectId: 'pc-ram', linkId: 'link-ram', label: 'RAM' },
+        { selectId: 'pc-ssd', linkId: 'link-ssd', label: 'SSD' },
+        { selectId: 'pc-case', linkId: 'link-case', label: 'Fonte/Gabinete' }
+      ];
+
+      let total = 0;
+      const summaryList = document.getElementById('pc-summary-list');
+      summaryList.innerHTML = '';
+
+      fields.forEach(f => {
+        const sel = document.getElementById(f.selectId);
+        const opt = sel.options[sel.selectedIndex];
+        const price = Number(opt.value);
+        const name = opt.dataset.name;
+        const source = opt.dataset.source;
+        const url = opt.dataset.url;
+
+        // Atualiza link direto para pesquisa no Mercado Livre ou Pichau
+        const linkEl = document.getElementById(f.linkId);
+        if (linkEl && url) {
+          linkEl.href = url;
+        }
+
+        total += price;
+
+        const badgeColor = source === 'Mercado Livre'
+          ? 'text-amber-400 bg-amber-400/10 border-amber-400/20'
+          : source === 'Pichau'
+            ? 'text-rose-400 bg-rose-400/10 border-rose-400/20'
+            : 'text-slate-500 bg-slate-900 border-slate-800';
+
+        const li = document.createElement('li');
+        li.className = 'flex items-center justify-between gap-2 pb-2 border-b border-slate-900';
+        li.innerHTML = `
+          <div class="min-w-0">
+            <span class="text-slate-200 font-medium block truncate">${name}</span>
+            ${price > 0 ? `<span class="inline-block mt-0.5 text-[10px] px-1.5 py-0.5 rounded border ${badgeColor}">${source}</span>` : ''}
+          </div>
+          <span class="font-bold text-white shrink-0">${price > 0 ? '~ ' + formatBRL(price) : 'R$ 0'}</span>
+        `;
+        summaryList.appendChild(li);
+      });
+
+      document.getElementById('pc-total-estimate').textContent = `~ ${formatBRL(total)}`;
+    }
+
+    function sendPcBuildWhatsApp() {
+      const fields = ['pc-cpu', 'pc-mobo', 'pc-gpu', 'pc-ram', 'pc-ssd', 'pc-case'];
+      let total = 0;
+      const chosen = [];
+
+      fields.forEach(id => {
+        const sel = document.getElementById(id);
+        const opt = sel.options[sel.selectedIndex];
+        const price = Number(opt.value);
+        total += price;
+        if (price > 0) {
+          chosen.push(`• ${opt.dataset.name} (~${formatBRL(price)} - Ref. ${opt.dataset.source})`);
+        }
+      });
+
+      const listText = chosen.length > 0 ? chosen.join('\n') : '• Gostaria de ajuda para escolher as peças do zero.';
+      const msg = `Olá E.S Informática! Montei esta configuração de PC no site (com base no Mercado Livre / Pichau) e gostaria de cotar com vocês:\n\n${listText}\n\n*Valor aproximado das peças: ~ ${formatBRL(total)}*`;
+
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
+    }
+
+    function toggleMobileMenu() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      renderCatalog();
+      renderTestimonials();
+      updatePcBuilder();
+    });
+  </script>
 </body>
 </html>
